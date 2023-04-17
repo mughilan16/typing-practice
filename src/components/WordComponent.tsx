@@ -19,7 +19,6 @@ const WordComponent = (props: WordComponentProps) => {
     background-color: black;
     }
   `
-  console.log(props.word.state)
   return <>
     <style>{styles}</style>
     <span className={props.word.state}>{props.word.content} </span>

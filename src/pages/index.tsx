@@ -4,26 +4,29 @@ import { useState } from "react";
 
 export default function Home() {
   const string = "The quick brown fox jumps over the lazy dog.";
-  let currentWord = 0;
+  const [currentWord, setCurrentWord] = useState(0);
   let tempWords: Array<Word> = string.split(' ').map(value => {
     return { content: value, state: 'normal' }
   });
   tempWords[currentWord].state = 'current';
   const [words, setWords] = useState(tempWords);
-  console.log(words);
   const submitHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === " ") {
+      if (currentWord === words.length) {
+        alert("stop");
+        return;
+      }
       tempWords = [...words];
+      console.log(`${e.currentTarget.value} ${words[currentWord].content}`)
       if (e.currentTarget.value === words[currentWord].content) {
         tempWords[currentWord].state = 'correct';
-        setWords([...words,])
       } else {
         tempWords[currentWord].state = 'wrong';
       }
-      currentWord++;
+      alert("Correct")
+      setCurrentWord(currentWord + 1);
       tempWords[currentWord].state = 'current';
       setWords([...tempWords])
-      console.log(words[currentWord].state);
       e.currentTarget.value = "";
     }
   }
